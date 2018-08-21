@@ -1,13 +1,10 @@
 ---
 
-- name: Setup Local NginX Server
+- name: Setup Local NGINX Server
   hosts: all
   vars:
-    http_port: 80
-    max_clients: 200
     epel_repo_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
     epel_repo_gpg_key_url: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
-    epel_repofile_path: "/etc/yum.repos.d/epel.repo"
   remote_user: root
   become: yes
 
@@ -29,12 +26,12 @@
       state: latest
       exclude: kernel*
 
-  - name: Install nginx
+  - name: Install NGINX
     yum:
       name: nginx
       state: present
 
-  - name: Start NGiNX
+  - name: Start NGINX
     service:
       name: nginx
       state: started
